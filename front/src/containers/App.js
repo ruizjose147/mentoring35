@@ -11,7 +11,7 @@ class App extends Component {// component stateful
     };
 
     return (
-      <div >
+      <div style={fondo}>
         <h3>Domino</h3>
         <p>Ficha-Random</p>
         <From />
