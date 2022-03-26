@@ -28,11 +28,11 @@ public class RandomController {
         this.randomRepository = randomRepository;
     }
 
-    @PostMapping("")
+   /*@PostMapping("")
     public Mono<Random> post(@RequestBody RequestDTO request) {
         return Mono.just(new Random()).map(entity -> {
             entity.setDate(new Date());
-            entity.setOrginalList(request.getList());
+            entity.setDominoList(request.getList());
             return entity;
         }).map(entity -> {
             var list = Stream.of(request.getList().split(","))
@@ -41,6 +41,17 @@ public class RandomController {
             Collections.shuffle(list);
             var randomList = list.stream().collect(Collectors.joining(","));
             entity.setRandomList(randomList);
+            return entity;
+        }).flatMap(randomRepository::save);
+    }*/
+
+    @PostMapping("")
+    public Mono<Random> post() {
+        String valorUno = String.valueOf(new java.util.Random().nextInt(7));
+        String valorDos = String.valueOf(new java.util.Random().nextInt(7));
+        return Mono.just(new Random()).map(entity -> {
+            entity.setDate(new Date());
+            entity.setFicha(valorUno +"/"+valorDos);
             return entity;
         }).flatMap(randomRepository::save);
     }
